@@ -1,0 +1,66 @@
+常用终端命令（通常由命令 + 选项 + 参数组成）：
+
+纯命令（不通常的那一类）：
+Tab键   补全代码或指令
+ctrl+O  保存当前修改
+Ctrl+Z  暂停当前进程 
+Ctrl+C  终止当前进程
+ctrl+D  退出当前用户会话
+
+复合命令：
+命令部：
+mkdir	创建全新的目录                                mkdir ~/opencv_build && cd ~/opencv_build  
+cd	    切换紧接的工作目录                            cd ~/opencv_build/opencv/build
+ls	    列出目录内容（多用来检查目标文件是否保存或下载）
+uname	    查看系统内核信息
+date	    查看系统时间
+timedatectl	管理系统时间
+free	查看内存使用情况
+du	    查看文件 
+cp	    复制文件 
+wget	下载文件 //好用是好用，但要分网站了
+curl    下载文件
+ssh	    远程登录 Linux 
+kill	发送信号终止进程（比ctrl C要精细）
+fg	    后台切换到前台（倒也不用记，终端有提示）
+bg	    将暂停的进程切换到后台继续运行
+clear	清空屏幕
+history	查看命令历史记录
+tar	    压缩，解压文件
+rm -rf /   删除系统文件（慎用）
+sudo	以 root 权限执行指令
+chown	修改所有者和所属组
+chmod	修改权限
+cat
+
+选项部：
+$	引用变量 example：echo $HOME  输出当前用户的家目录	
+''（单引号）	其中的内容原样输出
+""（双引号）	其中的变量会被解析，
+~（波浪线）	代表当前用户的家目录    cd ~（切换到家目录）和ls ~/Documents（列出家目录下的Documents文件夹内容）
+.（点）	    代表当前目录	        ./steam++（也不止是目录）
+..（双点）	代表上级目录	        cd ..（切换到上级目录）
+-a	--all	显示所有内容  和下面的“-l”结合使用
+-l	--long	长格式输出（显示详细信息，如权限、大小、时间）	
+-n	--dry-run	模拟操作（这个真有用）	
+#	注释：#后的内容会被终端忽略	
+^   表示行的开头	
+$	表示行的结尾	
+/	用于分隔目录层级	比如:/home/ubuntu/Documents
+选项设计遵循：
+短选项（-l）
+组合短选项：多个短选项可合并，如 ls -la 等价于 ls -l -a，ps aux 是 ps -a -u -x 的合并
+长选项（--long）
+
+参数部：
+参数是命令执行时需要处理的具体对象，通常是文件名、目录路径、字符串、数值等
+
+常用终端命令：
+sudo apt update                 列表更新软件包（他是怎么知道更新什么的？）
+sudo apt upgrade                升级已安装的包
+sudo apt install <package_name> 安装软件包
+sudo apt remove <package_name>  删除软件
+apt search <keyword>            搜索软件包
+apt show <package_name>         查看软件包信息
+
+

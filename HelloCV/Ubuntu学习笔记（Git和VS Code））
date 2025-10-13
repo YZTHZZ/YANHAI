@@ -1,0 +1,71 @@
+GitHub的使用
+第一步：
+先下一个加速器：Watt toolkit //Ps：能在官网上下的就在官网上下，不要那么爱终端操作。No 作，No die
+
+第二步：
+注册账号；//毫无难度
+
+第三步：
+下载VS Code 
+ 安装依赖
+sudo apt update
+sudo apt install software-properties-common apt-transport-https wget
+//官网好就好在，他把软件和依赖打包下载了。避免下完软件，还要自己想配什么版本依赖好
+
+导入Microsoft GPG密钥
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+
+添加VS Code仓库
+echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+
+安装VS Code
+sudo apt update
+sudo apt install code 
+
+在应用程序菜单中显示：
+sudo update-desktop-database
+//这个就不要用小鱼ROS的一键下载了，版本太落后，连扩展都打不开，还要费劲删除。
+  不过VS Code在终端用APT下，是真方便，下载配置一步到位。
+
+第四步；
+建立仓库并链接克隆仓库
+生成密钥（没有密钥就无法建立克隆仓库）
+ssh-keygen -t ed25519 -C "your_email@example.com" -N "" -f ~/.ssh/id_ed25519_github   //在VS Code的终端进行  
+添加到GitHub：
+cat ~/.ssh/id_ed25519_github.pub                                                      //复制公钥到GitHub Settings -> SSH Keys
+测试连接
+ssh -T git@github.com                                                                 //结果返回了Hi username!
+
+第五步：
+使用克隆仓库
+GitHub上的是远程仓，也就是仓库区，无法进行修改，只能通过VS Code，也就是工作区，修改克隆仓，
+。这些修改都被自动放在暂存区中避免后悔，最后最终手动进行同步用以改变远程仓 。              //讲真这真的需要教程
+
+VS Code的Git操作
+1.克隆仓库         git clone     2.查看状态             git status
+3.添加到暂存区     git add .     4.提交到本地仓库        git commit -m "备注"
+5.推送到远程仓库   git push      6.拉取远程仓库最新内容   git pull
+7.查看日志         git log       
+8.查看分支         git branch
+9.创建分支         git branch <branch_name>
+10.切换分支        git checkout <branch_name>
+11.合并分支        git merge <branch_name>
+12.删除分支        git branch -d <branch_name>
+13.查看远程仓库    git remote -v
+14.添加远程仓      git remote add origin <repository_url>
+15.删除远程仓库    git remote remove origin
+16.重命名远程仓库  git remote rename origin new_name
+
+VSCode的配置
+1.安装扩展
+2.设置主题  
+3.设置快捷键
+4.设置自动保存
+5.设置终端
+6.设置代码格式化工具
+7.设置代码片段
+8.设置工作区
+9.设置同步
+10.设置调试配置 
+11.设置版本控制
