@@ -1,12 +1,12 @@
 1.安装ROS2（小鱼ROS，永远的神）
 一键配置+安装：wget http://fishros.com/install -O fishros && . fishros  
 //一个空格都不要少，不然就失效了，
- Q1：但编程的时候编译器似乎并不在乎有没有空格啊？
- A1：终端命令的基本结构通常是「命令 + 选项 + 参数」，三者需用空格分隔才能被正确识别。
+//Q1：但编程的时候编译器似乎并不在乎有没有空格啊？
+//A1：终端命令的基本结构通常是「命令 + 选项 + 参数」，三者需用空格分隔才能被正确识别。
      而选项通常以 -或 --开头，若与命令连写，则会被识别为一个命令名，但这个命令名并不存在。
      PS:终端命令是即时解释执行,类似python，不过python有逻辑处理，而它只会调用工具，嗯，这也许就是为什么空格也有作用了。
-
-
+验证安装：ros2 
+ros2 run demo_nodes_cpp talker               // 应输出ROS2消息
 
 2.安装OpenCV:
 
@@ -24,6 +24,44 @@ wget -O opencv.zip https://github.com/opencv/opencv/archive/4.5.16.zip
 unzip opencv.zip && cd opencv-4.5.16
 mkdir build && cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_GTK=ON ..
-make -j$(nproc)  根据CPU核数编译
+make -j$(nproc)  根据CPU核数编译                      
+//Q4:为什么要根据CPU核数编译？
+//A4:利用多核CPU可以并行处理任务，加快编译速度，提高效率
 sudo make install
+
+再然后是配置环境变量：
+sudo gedit /etc/ld.so.conf.d/opencv.conf
+//Q5:为啥配置环境时，总要配置环境变量？
+//A5:配置环境变量可以让系统和应用程序更方便地找到所需的库和工具，提高运行效率。
+在文件中添加一行：/usr/local/lib    
+sudo ldconfig
+
+最后实践验证安装是否成功：
+C++:
+include <opencv2/opencv.hpp> // 包含 OpenCV 头文件
+using namespace cv；
+int main() {
+   
+Mat image = cv::imread("picture.jpg");   读取一张图片
+namedWindow("Display window");           创建一个窗口来显示图片
+imshow("Display window", image);         在窗口中显示图片
+waitKey(0);                              等待按键按下
+    
+return 0;
+}
+
+
+3.安装CMake（先下一个，避免之后要用）
+
+sudo apt update && sudo apt install -y curl build-essential libssl-dev                             //安装依赖
+
+curl -LO https://github.com/Kitware/CMake/releases/download/v3.30.1/cmake-3.30.1-linux-x86_64.sh   //获取安装脚本    
+sudo sh cmake-3.30.1-linux-x86_64.sh --prefix=/opt/cmake --skip-license
+//Q6安装脚本和源码有啥区别？
+//A6安装脚本是预编译的，直接运行即可安装，而源码需要下载后编译才能使用。
+
+echo 'export PATH="/opt/cmake/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc                                                                                    //配置环境变量
+ 
+cmake --version                                                                                     //验证安装是否成功
 

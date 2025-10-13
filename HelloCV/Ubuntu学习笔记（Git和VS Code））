@@ -1,12 +1,11 @@
 GitHub的使用
 第一步：
-先下一个加速器：Watt toolkit //Ps：能在官网上下的就在官网上下，不要那么爱终端操作。No 作，No die
-
+先下一个加速器：Watt toolkit //Ps：能在官网上下的就在官网上下，不要那么爱终端下载。No 作，No die
 第二步：
 注册账号；//毫无难度
 
 第三步：
-下载VS Code 
+下载VS Code（作为主要的编辑器）
  安装依赖
 sudo apt update
 sudo apt install software-properties-common apt-transport-https wget
@@ -30,12 +29,15 @@ sudo update-desktop-database
 
 第四步；
 建立仓库并链接克隆仓库
+
 生成密钥（没有密钥就无法建立克隆仓库）
 ssh-keygen -t ed25519 -C "your_email@example.com" -N "" -f ~/.ssh/id_ed25519_github   //在VS Code的终端进行  
 添加到GitHub：
 cat ~/.ssh/id_ed25519_github.pub                                                      //复制公钥到GitHub Settings -> SSH Keys
 测试连接
 ssh -T git@github.com                                                                 //结果返回了Hi username!
+建立克隆仓库；  
+ctrl + p + git clone 回车                                                             //真的这一步一定要最后再进行。                                                       
 
 第五步：
 使用克隆仓库
@@ -57,15 +59,29 @@ VS Code的Git操作
 15.删除远程仓库    git remote remove origin
 16.重命名远程仓库  git remote rename origin new_name
 
-VSCode的配置
-1.安装扩展
-2.设置主题  
-3.设置快捷键
-4.设置自动保存
-5.设置终端
-6.设置代码格式化工具
-7.设置代码片段
-8.设置工作区
-9.设置同步
-10.设置调试配置 
-11.设置版本控制
+VSCode的远程开发
+
+1.安装 Remote SSH 扩展：
+安装Remote - SSH，点击Connect to Host，选择配置文件，输入仓库链接和用户名
+2.配置 settings.json 文件：
+打开 VS Code 的设置文件 settings.json，添加以下配置：
+{
+    "remote.SSH.remotePlatform": {
+        "your_remote_host": "linux"
+    },
+    "remote.SSH.path": "/usr/bin/ssh",
+    "remote.SSH.useLocalServer": false,
+    "remote.SSH.showLoginTerminal": true,
+    "remote.SSH.enableDynamicForwarding": true,
+    "remote.SSH.defaultExtensions": [
+        "ms-vscode.cpptools",
+        "ms-python.python",
+        "ms-azuretools.vscode-docker"
+    ]
+}
+3.连接到远程主机：
+按下 F1，输入 Remote-SSH: Connect to Host，选择远程主机，输入密码进行连接。
+
+4.使用远程开发环境：
+现在就可以在本地一样使用 VS Code 进行远程开发了。
+（这操作离我还是有点远）
