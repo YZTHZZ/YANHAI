@@ -6,7 +6,8 @@ GitHub的使用
 
 第三步：
 下载VS Code（作为主要的编辑器）
- 安装依赖
+
+安装依赖
 sudo apt update
 sudo apt install software-properties-common apt-transport-https wget
 //官网好就好在，他把软件和依赖打包下载了。避免下完软件，还要自己想配什么版本依赖好
@@ -30,12 +31,17 @@ sudo update-desktop-database
 第四步；
 建立仓库并链接克隆仓库
 
+建立一个仓库
+
 生成密钥（没有密钥就无法建立克隆仓库）
 ssh-keygen -t ed25519 -C "your_email@example.com" -N "" -f ~/.ssh/id_ed25519_github   //在VS Code的终端进行  
+
 添加到GitHub：
 cat ~/.ssh/id_ed25519_github.pub                                                      //复制公钥到GitHub Settings -> SSH Keys
+
 测试连接
 ssh -T git@github.com                                                                 //结果返回了Hi username!
+
 建立克隆仓库；  
 ctrl + p + git clone 回车                                                             //真的这一步一定要最后再进行。                                                       
 
